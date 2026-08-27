@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 enum class Aba {
-    MISSOES, CONSTELACAO, PERFIL
+    MISSOES, PERFIL
 }
 
 
@@ -46,13 +46,6 @@ fun RodapeNavegacao(
             label = "Missões",
             selecionado = abaAtual == Aba.MISSOES,
             onClick = { onAbaSelecionada(Aba.MISSOES) }
-        )
-
-        ItemRodape(
-            icone = Icons.Default.Star,
-            label = "Constelação",
-            selecionado = abaAtual == Aba.CONSTELACAO,
-            onClick = { onAbaSelecionada(Aba.CONSTELACAO) }
         )
 
         ItemRodape(

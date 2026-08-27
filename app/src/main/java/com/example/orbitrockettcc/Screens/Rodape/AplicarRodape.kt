@@ -13,10 +13,16 @@ import androidx.compose.ui.Modifier
 import com.example.orbitrockettcc.Screens.Perfil.HomeScreenRoot
 import com.example.orbitrockettcc.Screens.Tarefas.MissaoScreen
 
+
 @Composable
 fun AplicarRodape() {
 
     var abaAtual by remember { mutableStateOf(Aba.MISSOES) }
+
+    // Guarda o planeta selecionado
+    var planetaSelecionadoNome by remember {
+        mutableStateOf<String?>(null)
+    }
 
     Scaffold(
         bottomBar = {
@@ -26,14 +32,21 @@ fun AplicarRodape() {
             )
         }
     ) { padding ->
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
         ) {
+
             when (abaAtual) {
-                Aba.MISSOES -> MissaoScreen()
-                Aba.CONSTELACAO -> HomeScreenRoot()//trocar aq
+
+
+
+                Aba.MISSOES -> {
+                    MissaoScreen()
+                }
+
                 Aba.PERFIL -> {
                     HomeScreenRoot()
                 }
