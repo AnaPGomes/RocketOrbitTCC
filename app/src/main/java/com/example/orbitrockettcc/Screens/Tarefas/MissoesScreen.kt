@@ -53,9 +53,7 @@ import com.example.orbitrockettcc.Screens.fundoEstrela
 @Composable
 fun MissaoScreen() {
 
-    // ========================================================
-    // ESTADOS
-    // ========================================================
+
 
     var mostrarCard by remember {
         mutableStateOf(false)
@@ -82,9 +80,7 @@ fun MissaoScreen() {
     }
 
 
-    // ========================================================
-    // FUNÇÃO PARA FECHAR O FORMULÁRIO
-    // ========================================================
+
 
     fun fecharFormulario() {
         nomeTarefa = ""
@@ -94,9 +90,7 @@ fun MissaoScreen() {
     }
 
 
-    // ========================================================
-    // SE TIVER UMA TAREFA SELECIONADA
-    // ========================================================
+
 
     if (tarefaSelecionada != null) {
 
@@ -111,21 +105,16 @@ fun MissaoScreen() {
     }
 
 
-    // ========================================================
-    // TELA PRINCIPAL
-    // ========================================================
+
 
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
 
-        // Fundo
+
         fundoEstrela()
 
 
-        // ====================================================
-        // TÍTULO
-        // ====================================================
 
         Text(
             text = "Minhas Missões",
@@ -139,9 +128,6 @@ fun MissaoScreen() {
         )
 
 
-        // ====================================================
-        // LISTA DE MISSÕES
-        // ====================================================
 
         LazyColumn(
             modifier = Modifier
@@ -217,9 +203,6 @@ fun MissaoScreen() {
         }
 
 
-        // ====================================================
-        // FORMULÁRIO
-        // ====================================================
 
         if (mostrarCard) {
 
@@ -238,9 +221,6 @@ fun MissaoScreen() {
                         .padding(16.dp)
                 ) {
 
-                    // ----------------------------------------
-                    // TÍTULO
-                    // ----------------------------------------
 
                     Text(
                         text = "Nova Missão",
@@ -255,9 +235,6 @@ fun MissaoScreen() {
                     )
 
 
-                    // ----------------------------------------
-                    // NOME
-                    // ----------------------------------------
 
                     OutlinedTextField(
 
@@ -307,9 +284,6 @@ fun MissaoScreen() {
                     )
 
 
-                    // ====================================================
-                    // PLANETAS
-                    // ====================================================
 
                     Text(
                         text = "Escolha o seu destino:",
@@ -339,7 +313,7 @@ fun MissaoScreen() {
                             Arrangement.spacedBy(7.dp)
                     ) {
 
-                        // LUA
+
                         item {
 
                             Column(
@@ -403,7 +377,7 @@ fun MissaoScreen() {
                         }
 
 
-                        // VÊNUS
+
                         item {
 
                             Column(
@@ -467,7 +441,6 @@ fun MissaoScreen() {
                         }
 
 
-                        // MARTE
                         item {
 
                             Column(
@@ -531,7 +504,7 @@ fun MissaoScreen() {
                         }
 
 
-                        // MERCÚRIO
+
                         item {
 
                             Column(
@@ -595,7 +568,7 @@ fun MissaoScreen() {
                         }
 
 
-                        // JÚPITER
+
                         item {
 
                             Column(
@@ -659,7 +632,6 @@ fun MissaoScreen() {
                         }
 
 
-                        // SATURNO
                         item {
 
                             Column(
@@ -723,7 +695,6 @@ fun MissaoScreen() {
                         }
 
 
-                        // URANO
                         item {
 
                             Column(
@@ -787,7 +758,6 @@ fun MissaoScreen() {
                         }
 
 
-                        // NETUNO
                         item {
 
                             Column(
@@ -851,7 +821,7 @@ fun MissaoScreen() {
                         }
 
 
-                        // PLUTÃO
+
                         item {
 
                             Column(
@@ -916,10 +886,6 @@ fun MissaoScreen() {
                     }
 
 
-                    // ====================================================
-                    // DURAÇÃO
-                    // ====================================================
-
                     Spacer(
                         modifier = Modifier.height(8.dp)
                     )
@@ -944,9 +910,6 @@ fun MissaoScreen() {
                     )
 
 
-                    // ====================================================
-                    // BOTÕES
-                    // ====================================================
 
                     Row {
 
@@ -962,7 +925,8 @@ fun MissaoScreen() {
                                     tarefas.add(
                                         Tarefa(
                                             nome = nomeTarefa,
-                                            duracao = duracao
+                                            duracao = duracao,
+                                            planeta = planetaSelecionado
                                         )
                                     )
 
@@ -1004,10 +968,6 @@ fun MissaoScreen() {
             }
         }
 
-
-        // ====================================================
-        // BOTÃO +
-        // ====================================================
 
         FloatingActionButton(
 

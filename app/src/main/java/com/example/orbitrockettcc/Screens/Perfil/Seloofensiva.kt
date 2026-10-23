@@ -25,7 +25,7 @@ fun SeloOfensiva(ofensiva: Int) {
             .padding(horizontal = 12.dp, vertical = 6.dp)
     ) {
         Text(
-            text = "🔥 $ofensiva",
+            text = " ⭐ $ofensiva",
             color = Color(0xFFFFD54F),
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp

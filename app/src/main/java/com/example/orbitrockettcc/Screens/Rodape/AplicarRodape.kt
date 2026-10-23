@@ -19,7 +19,7 @@ fun AplicarRodape() {
 
     var abaAtual by remember { mutableStateOf(Aba.MISSOES) }
 
-    // Guarda o planeta selecionado
+
     var planetaSelecionadoNome by remember {
         mutableStateOf<String?>(null)
     }

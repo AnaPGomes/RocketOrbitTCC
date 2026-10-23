@@ -29,6 +29,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -142,6 +143,9 @@ fun CadastroScreen(
                 label = {
                     Text("Usuário")
                 },
+                textStyle = TextStyle(
+                    color = Color(0xFFB39DDB)
+                ),
                 shape = RoundedCornerShape(20.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedLabelColor = Color(0xFFB39DDB),
@@ -165,6 +169,9 @@ fun CadastroScreen(
                 label = {
                     Text("Email")
                 },
+                textStyle = TextStyle(
+                    color = Color(0xFFB39DDB)
+                ),
                 shape = RoundedCornerShape(20.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedLabelColor = Color(0xFFB39DDB),
@@ -189,6 +196,9 @@ fun CadastroScreen(
                 label = {
                     Text("Senha")
                 },
+                textStyle = TextStyle(
+                    color = Color(0xFFB39DDB)
+                ),
                 shape = RoundedCornerShape(20.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedLabelColor = Color(0xFFB39DDB),
@@ -210,6 +220,9 @@ fun CadastroScreen(
                 onValueChange = {
                     ConfirmarSenha = it
                 },
+                textStyle = TextStyle(
+                    color = Color(0xFFB39DDB)
+                ),
                 label = {
                     Text("Confirmar Senha")
                 },
@@ -367,7 +380,7 @@ fun CadastroScreen(
                 fontWeight = FontWeight.Normal,
 
                 modifier = Modifier
-                    .offset(x = 100.dp)
+                    .offset(x = 55.dp)
                     .clickable {
 
                         onVoltarLogin()

@@ -19,9 +19,26 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.orbitrockettcc.Models.OfensivaManager
 import java.util.Calendar
+import com.example.orbitrockettcc.Screens.fundoEstrela
 
 // Total de estrelas necessárias pra completar a constelação da semana
 private const val TOTAL_ESTRELAS = 7
+
+fun adicionarEstrela(context: Context) {
+    val prefs = context.getSharedPreferences(
+        "rocketorbit",
+        Context.MODE_PRIVATE
+    )
+
+    val estrelas = prefs.getInt("stars", 0)
+
+    prefs.edit()
+        .putInt(
+            "stars",
+            (estrelas + 1).coerceAtMost(TOTAL_ESTRELAS)
+        )
+        .apply()
+}
 
 
 @Composable
@@ -71,176 +88,182 @@ fun HomeScreen(
     // Quantas estrelas ainda faltam pra completar a semana
     val faltam = (TOTAL_ESTRELAS - estrelas).coerceAtLeast(0)
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFF0B0B1A))
-            .statusBarsPadding()
-            .verticalScroll(rememberScrollState())
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
 
+        fundoEstrela()
 
-        Box(
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.33f)
-                .background(Color(0xFF1A1A2E))
-                .padding(20.dp)
+                .fillMaxSize()
+                .statusBarsPadding()
+                .verticalScroll(rememberScrollState())
         ) {
 
-            Column {
 
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.33f)
+                    .background(Color(0xFF371660))
+                    .padding(20.dp)
+            ) {
 
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                Column {
 
-                        // Círculo amarelo no lugar da foto de perfil
-                        Box(
-                            modifier = Modifier
-                                .size(90.dp)
-                                .clip(CircleShape)
-                                .background(Color(0xFFFFD54F))
-                        )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
 
-                        Spacer(Modifier.width(12.dp))
+                        Row(verticalAlignment = Alignment.CenterVertically) {
 
-                        Text(
-                            text = nome,
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
-                        )
+                            // Círculo amarelo no lugar da foto de perfil
+                            Box(
+                                modifier = Modifier
+                                    .size(90.dp)
+                                    .clip(CircleShape)
+                                    .background(Color(0xFFFFD54F))
+                            )
+
+                            Spacer(Modifier.width(12.dp))
+
+                            Text(
+                                text = nome,
+                                fontSize = 24.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White
+                            )
+                        }
+
+                        // Selo de ofensiva, ex: "5"
+
                     }
 
-                    // Selo de ofensiva, ex: "🔥 5"
-
-                }
-
-                Spacer(Modifier.height(18.dp))
-
-                Text(
-                    text = "CONSTELAÇÃO",
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Spacer(Modifier.height(6.dp))
-
-                Text(
-                    text = "$estrelas / $TOTAL_ESTRELAS",
-                    color = Color(0xFFFFD54F),
-                    fontWeight = FontWeight.Bold
-                )
-
-                Spacer(Modifier.height(8.dp))
-
-                LinearProgressIndicator(
-                    progress = progresso,
-                    modifier = Modifier.fillMaxWidth(),
-                    color = Color(0xFFFFD54F),
-                    trackColor = Color.DarkGray
-                )
-            }
-        }
-
-        Spacer(Modifier.height(16.dp))
-
-        Column(Modifier.padding(16.dp)) {
-
-            // Card da ofensiva
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF1A1A2E)),
-                shape = RoundedCornerShape(16.dp)
-            ) {
-                Column(Modifier.padding(16.dp)) {
-
-                    Text(
-                        text = "OFENSIVA",
-                        color = Color(0xFFFFD54F),
-                        fontWeight = FontWeight.Bold
-                    )
-
-                    Spacer(Modifier.height(8.dp))
-
-                    Text(
-                        text = if (ofensiva > 0) {
-                            "$ofensiva ${if (ofensiva == 1) "dia seguido" else "dias seguidos"}"
-                        } else {
-                            " Nenhuma ofensiva ainda"
-                        },
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp
-                    )
-
-                    Spacer(Modifier.height(4.dp))
-
-                    Text(
-                        text = "Conclua uma missão hoje pra manter a sequência",
-                        color = Color.Gray,
-                        fontSize = 12.sp
-                    )
-                }
-            }
-
-            Spacer(Modifier.height(12.dp))
-
-            // Card da constelação (estrelas que faltam)
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF1A1A2E)),
-                shape = RoundedCornerShape(16.dp)
-            ) {
-                Column(Modifier.padding(16.dp)) {
+                    Spacer(Modifier.height(18.dp))
 
                     Text(
                         text = "CONSTELAÇÃO",
-                        color = Color(0xFFFFD54F),
-                        fontWeight = FontWeight.Bold
-                    )
-
-                    Spacer(Modifier.height(8.dp))
-
-                    Text(
-                        text = "RESTAM $faltam",
-                        color = Color.Cyan,
-                        fontSize = 12.sp
-                    )
-                }
-            }
-
-            Spacer(Modifier.height(12.dp))
-
-            // Card de incentivo
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF1A1A2E)),
-                shape = RoundedCornerShape(16.dp)
-            ) {
-                Column(Modifier.padding(16.dp)) {
-
-                    Text(
-                        text = "Mantenha a órbita",
-                        color = Color(0xFFFFD54F),
+                        color = Color.White,
                         fontWeight = FontWeight.Bold
                     )
 
                     Spacer(Modifier.height(6.dp))
 
                     Text(
-                        text = if (estrelas < TOTAL_ESTRELAS) {
-                            "Complete suas missões para encher sua constelação!!!"
-                        } else {
-                            "7/7! Mandou bem!"
-                        },
-                        color = Color.Gray,
-                        fontSize = 12.sp
+                        text = "$estrelas / $TOTAL_ESTRELAS",
+                        color = Color(0xFFFFD54F),
+                        fontWeight = FontWeight.Bold
                     )
+
+                    Spacer(Modifier.height(8.dp))
+
+                    LinearProgressIndicator(
+                        progress = progresso,
+                        modifier = Modifier.fillMaxWidth(),
+                        color = Color(0xFFFFD54F),
+                        trackColor = Color.DarkGray
+                    )
+                }
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            Column(Modifier.padding(16.dp)) {
+
+                // Card da ofensiva
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFF4E3279)),
+                    shape = RoundedCornerShape(16.dp)
+                ) {
+                    Column(Modifier.padding(16.dp)) {
+
+                        Text(
+                            text = "OFENSIVA",
+                            color = Color(0xFFFFD54F),
+                            fontWeight = FontWeight.Bold
+                        )
+
+                        Spacer(Modifier.height(8.dp))
+
+                        Text(
+                            text = if (ofensiva > 0) {
+                                "$ofensiva ${if (ofensiva == 1) "dia seguido" else "dias seguidos"}"
+                            } else {
+                                " Nenhuma ofensiva ainda"
+                            },
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 16.sp
+                        )
+
+                        Spacer(Modifier.height(4.dp))
+
+                        Text(
+                            text = "Conclua uma missão hoje pra manter a sequência",
+                            color = Color.Gray,
+                            fontSize = 12.sp
+                        )
+                    }
+                }
+
+                Spacer(Modifier.height(12.dp))
+
+                // Card da constelação (estrelas que faltam)
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFF4E3279)),
+                    shape = RoundedCornerShape(16.dp)
+                ) {
+                    Column(Modifier.padding(16.dp)) {
+
+                        Text(
+                            text = "CONSTELAÇÃO",
+                            color = Color(0xFFFFD54F),
+                            fontWeight = FontWeight.Bold
+                        )
+
+                        Spacer(Modifier.height(8.dp))
+
+                        Text(
+                            text = "RESTAM $faltam",
+                            color = Color.Cyan,
+                            fontSize = 12.sp
+                        )
+                    }
+                }
+
+                Spacer(Modifier.height(12.dp))
+
+                // Card de incentivo
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFF4E3279)),
+                    shape = RoundedCornerShape(16.dp)
+                ) {
+                    Column(Modifier.padding(16.dp)) {
+
+                        Text(
+                            text = "Mantenha a órbita",
+                            color = Color(0xFFFFD54F),
+                            fontWeight = FontWeight.Bold
+                        )
+
+                        Spacer(Modifier.height(6.dp))
+
+                        Text(
+                            text = if (estrelas < TOTAL_ESTRELAS) {
+                                "Complete suas missões para encher sua constelação!!!"
+                            } else {
+                                "7/7! Mandou bem!"
+                            },
+                            color = Color.Gray,
+                            fontSize = 12.sp
+                        )
+                    }
                 }
             }
         }

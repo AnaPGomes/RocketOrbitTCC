@@ -1,6 +1,5 @@
 package com.example.orbitrockettcc.Models
 
-
 import android.content.Context
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -13,6 +12,8 @@ object OfensivaManager {
     private const val PREFS = "rocketorbit"
     private const val KEY_OFENSIVA = "ofensiva"
     private const val KEY_ULTIMO_DIA = "ultimo_dia"
+    private const val KEY_STARS = "stars"
+    private const val TOTAL_ESTRELAS = 7
 
     private val formato = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
@@ -44,6 +45,18 @@ object OfensivaManager {
         prefs.edit()
             .putInt(KEY_OFENSIVA, nova)
             .putString(KEY_ULTIMO_DIA, hoje())
+            .apply()
+
+        return nova
+    }
+
+    fun adicionarEstrela(context: Context): Int {
+        val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        val atual = prefs.getInt(KEY_STARS, 0)
+        val nova = (atual + 1).coerceAtMost(TOTAL_ESTRELAS)
+
+        prefs.edit()
+            .putInt(KEY_STARS, nova)
             .apply()
 
         return nova

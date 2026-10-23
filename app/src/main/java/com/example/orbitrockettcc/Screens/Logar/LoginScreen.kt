@@ -30,6 +30,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -145,6 +146,9 @@ fun LoginScreen(
                 label = {
                     Text("Usuário")
                 },
+                textStyle = TextStyle(
+                    color = Color(0xFFB39DDB)
+                ),
 
 
 
@@ -180,6 +184,9 @@ fun LoginScreen(
                 label = {
                     Text("Senha")
                 },
+                textStyle = TextStyle(
+                    color = Color(0xFFB39DDB)
+                ),
 
 
 
@@ -302,7 +309,7 @@ fun LoginScreen(
                 color = Color(0xFF8D82AD),
                 text = "Ainda não tem uma conta? Cadastra-se",
                 modifier = Modifier
-                    .offset(x = 100.dp)
+                    .offset(x = 15.dp)
                     .clickable {
                         onCadastro()
                     }
